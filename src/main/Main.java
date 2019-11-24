@@ -5,17 +5,18 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
+import org.jsoup.helper.ViewTree;
 public class Main {
 
 	public static void main(String[] args) {
 		// example
-	       String url = "https://www.w3schools.com";
-	        String selector = "div.w3-container h4";
+	       String url = "https://www.naver.com";
+	        String selector = "h2";
 	        Document doc = null;    
 	        
 	        try {
-	            doc = Jsoup.connect(url).get(); // -- 1. get방식의 URL에 연결해서 가져온 값을 doc에 담는다.
+	            doc = Jsoup.connect(url).get(); // -- 1. get방식의 URL에 연결해서 가져온 값을 doc에 담는다.zz
+	            ViewTree.makeViewTreeFile(doc, "test.txt");
 	        } catch (IOException e) {
 	            System.out.println(e.getMessage());
 	        }
