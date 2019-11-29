@@ -14,7 +14,7 @@ import static org.jsoup.internal.Normalizer.normalize;
 /**
  * Parses a CSS selector into an Evaluator tree.
  */
-public class QueryParser {
+public class QueryParser implements QueryParserInterface{
     private final static String[] combinators = {",", ">", "+", "~", " "};
     private static final String[] AttributeEvals = new String[]{"=", "!=", "^=", "$=", "*=", "~="};
 
@@ -26,9 +26,10 @@ public class QueryParser {
      * Create a new QueryParser.
      * @param query CSS query
      */
-    private QueryParser(String query) {
+    protected QueryParser(String query) {
         this.query = query;
         this.tq = new TokenQueue(query);
+//        System.out.println("**" + query);
     }
 
     /**
@@ -38,6 +39,7 @@ public class QueryParser {
      */
     public static Evaluator parse(String query) {
         try {
+//        	System.out.println("1"+query);
             QueryParser p = new QueryParser(query);
             return p.parse();
         } catch (IllegalArgumentException e) {
@@ -62,7 +64,6 @@ public class QueryParser {
         while (!tq.isEmpty()) {
             // hierarchy and extras
             boolean seenWhite = tq.consumeWhitespace();
-
             if (tq.matchesAny(combinators)) {
                 combinator(tq.consume());
             } else if (seenWhite) {
@@ -201,7 +202,7 @@ public class QueryParser {
         else if (tq.matchChomp(":root"))
         	evals.add(new Evaluator.IsRoot());
         else if (tq.matchChomp(":matchText"))
-            evals.add(new Evaluator.MatchText());
+            evals.add(new Evaluator.MatchText());	
 		else // unhandled
             throw new Selector.SelectorParseException("Could not parse query '%s': unexpected token at '%s'", query, tq.remainder());
 
@@ -219,6 +220,7 @@ public class QueryParser {
         evals.add(new Evaluator.Class(className.trim()));
     }
 
+    
     private void byTag() {
         String tagName = tq.consumeElementSelector();
 
