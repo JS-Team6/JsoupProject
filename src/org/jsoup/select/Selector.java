@@ -90,7 +90,7 @@ public class Selector {
     public static Elements select(String query, Element root) {
         Validate.notEmpty(query);
 //        System.out.println("selector.select :" + query);
-        return select(QueryParser.parse(query), root);
+        return select(IdQueryParser.parse(query), root);
     }
 
     /**

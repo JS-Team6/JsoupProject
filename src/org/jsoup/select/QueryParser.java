@@ -15,12 +15,12 @@ import static org.jsoup.internal.Normalizer.normalize;
  * Parses a CSS selector into an Evaluator tree.
  */
 public class QueryParser implements QueryParserInterface{
-    private final static String[] combinators = {",", ">", "+", "~", " "};
-    private static final String[] AttributeEvals = new String[]{"=", "!=", "^=", "$=", "*=", "~="};
+	protected final static String[] combinators = {",", ">", "+", "~", " "};
+	protected static final String[] AttributeEvals = new String[]{"=", "!=", "^=", "$=", "*=", "~="};
 
-    private TokenQueue tq;
-    private String query;
-    private List<Evaluator> evals = new ArrayList<>();
+    protected TokenQueue tq;
+    protected String query;
+    protected List<Evaluator> evals = new ArrayList<>();
 
     /**
      * Create a new QueryParser.
@@ -79,7 +79,7 @@ public class QueryParser implements QueryParserInterface{
         return new CombiningEvaluator.And(evals);
     }
 
-    private void combinator(char combinator) {
+    protected void combinator(char combinator) {
         tq.consumeWhitespace();
         String subQuery = consumeSubQuery(); // support multi > childs
 
@@ -131,7 +131,7 @@ public class QueryParser implements QueryParserInterface{
         evals.add(rootEval);
     }
 
-    private String consumeSubQuery() {
+    protected String consumeSubQuery() {
         StringBuilder sq = StringUtil.borrowBuilder();
         while (!tq.isEmpty()) {
             if (tq.matches("("))
@@ -146,10 +146,10 @@ public class QueryParser implements QueryParserInterface{
         return StringUtil.releaseBuilder(sq);
     }
 
-    private void findElements() {
-        if (tq.matchChomp("#"))
-            byId();
-        else if (tq.matchChomp("."))
+    protected void findElements() {
+//        if (tq.matchChomp("#"))
+//            byId();
+        if (tq.matchChomp("."))
             byClass();
         else if (tq.matchesWord() || tq.matches("*|"))
             byTag();
@@ -208,11 +208,11 @@ public class QueryParser implements QueryParserInterface{
 
     }
 
-    private void byId() {
-        String id = tq.consumeCssIdentifier();
-        Validate.notEmpty(id);
-        evals.add(new Evaluator.Id(id));
-    }
+//    private void byId() {
+//        String id = tq.consumeCssIdentifier();
+//        Validate.notEmpty(id);
+//        evals.add(new Evaluator.Id(id));
+//    }
 
     private void byClass() {
         String className = tq.consumeCssIdentifier();
