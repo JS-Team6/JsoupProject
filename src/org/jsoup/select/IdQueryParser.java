@@ -2,59 +2,31 @@ package org.jsoup.select;
 
 import org.jsoup.helper.Validate;
 
-public class IdQueryParser extends QueryParser {
-
-	protected IdQueryParser(String query) {
-		super(query);
-		// TODO Auto-generated constructor stub
+public class IdQueryParser extends CustomQueryParser {
+	IdQueryParser(AbstractQueryParser parser){
+		this.queryParser = parser;
 	}
-    public static Evaluator parse(String query) {
-        try {
-//        	System.out.println("1"+query);
-        	IdQueryParser p = new IdQueryParser(query);
-            return p.parse();
-        } catch (IllegalArgumentException e) {
-            throw new Selector.SelectorParseException(e.getMessage());
-        }
-    }
-    Evaluator parse() {
-        tq.consumeWhitespace();
+	@Override
+	protected Evaluator parse(String subQuery) {
+		// TODO Auto-generated method stub
+		
+		return this.queryParser.parse(subQuery);
+	}
 
-        if (tq.matchesAny(combinators)) { // if starts with a combinator, use root as elements
-            evals.add(new StructuralEvaluator.Root());
-            combinator(tq.consume());
-        } else {
-            findElements();
-        }
+	@Override
+	protected void findElements() {
+		// TODO Auto-generated method stub
+	    if (tq.matchChomp("#"))
+	    	byId();
+	    else {
+	    	this.queryParser.findElements();
+	    }
+	    
+	}
 
-        while (!tq.isEmpty()) {
-            // hierarchy and extras
-            boolean seenWhite = tq.consumeWhitespace();
-            if (tq.matchesAny(combinators)) {
-                combinator(tq.consume());
-            } else if (seenWhite) {
-                combinator(' ');
-            } else { // E.class, E#id, E[attr] etc. AND
-                findElements(); // take next el, #. etc off queue
-            }
-        }
-
-        if (evals.size() == 1)
-            return evals.get(0);
-
-        return new CombiningEvaluator.And(evals);
-    }
-    protected void findElements() {
-    	
-        if (tq.matchChomp("#"))
-            byId();
-        else
-        	super.findElements();
-    }
-    private void byId() {
-    	System.out.println("123");
-        String id = tq.consumeCssIdentifier();
-        Validate.notEmpty(id);
-        evals.add(new Evaluator.Id(id));
-    }
+	private void byId() {
+		String id = tq.consumeCssIdentifier();
+		Validate.notEmpty(id);
+		evals.add(new Evaluator.Id(id));
+	}
 }

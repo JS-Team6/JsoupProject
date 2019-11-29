@@ -485,7 +485,9 @@ public class Elements extends ArrayList<Element> {
      * @return true if at least one element in the list matches the query.
      */
     public boolean is(String query) {
-        Evaluator eval = QueryParser.parse(query);
+    	QueryParser parser = new QueryParser(query);
+
+        Evaluator eval = parser.parse();
         for (Element e : this) {
             if (e.is(eval))
                 return true;
@@ -562,8 +564,10 @@ public class Elements extends ArrayList<Element> {
     }
 
     private Elements siblings(String query, boolean next, boolean all) {
+    	QueryParser parser = new QueryParser(query);
+
         Elements els = new Elements();
-        Evaluator eval = query != null? QueryParser.parse(query) : null;
+        Evaluator eval = query != null? parser.parse() : null;
         for (Element e : this) {
             do {
                 Element sib = next ? e.nextElementSibling() : e.previousElementSibling();

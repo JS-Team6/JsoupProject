@@ -11,7 +11,7 @@ public class Main {
 	public static void main(String[] args) {
 		// example
 	       String url = "https://dhlottery.co.kr/gameResult.do?method=byWin";
-	        String selector = "#footer";
+	        String selector = ".logo";
 	        Document doc = null;    
 	        
 	        try {

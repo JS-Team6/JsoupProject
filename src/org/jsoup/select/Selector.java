@@ -89,8 +89,10 @@ public class Selector {
      */
     public static Elements select(String query, Element root) {
         Validate.notEmpty(query);
+    	QueryParser parser = new QueryParser(query);
+
 //        System.out.println("selector.select :" + query);
-        return select(IdQueryParser.parse(query), root);
+        return select(parser.parse(), root);
     }
 
     /**
@@ -116,7 +118,9 @@ public class Selector {
     public static Elements select(String query, Iterable<Element> roots) {
         Validate.notEmpty(query);
         Validate.notNull(roots);
-        Evaluator evaluator = QueryParser.parse(query);
+    	QueryParser parser = new QueryParser(query);
+
+        Evaluator evaluator = parser.parse();
         ArrayList<Element> elements = new ArrayList<>();
         IdentityHashMap<Element, Boolean> seenElements = new IdentityHashMap<>();
         // dedupe elements by identity, not equality
@@ -158,7 +162,9 @@ public class Selector {
      */
     public static Element selectFirst(String cssQuery, Element root) {
         Validate.notEmpty(cssQuery);
-        return Collector.findFirst(QueryParser.parse(cssQuery), root);
+    	QueryParser parser = new QueryParser(cssQuery);
+
+        return Collector.findFirst(parser.parse(), root);
     }
 
     public static class SelectorParseException extends IllegalStateException {
