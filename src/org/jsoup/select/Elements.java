@@ -21,9 +21,12 @@ import java.util.List;
 
  @author Jonathan Hedley, jonathan@hedley.net */
 public class Elements extends ArrayList<Element> {
+	public static AbstractQueryParser parser;
     public Elements() {
     }
-
+    public static void setQueryParser(AbstractQueryParser p) {
+    	parser = p;
+    }
     public Elements(int initialCapacity) {
         super(initialCapacity);
     }
@@ -485,7 +488,7 @@ public class Elements extends ArrayList<Element> {
      * @return true if at least one element in the list matches the query.
      */
     public boolean is(String query) {
-        Evaluator eval = QueryParser.parse(query);
+        Evaluator eval = parser.parse(query);
         for (Element e : this) {
             if (e.is(eval))
                 return true;
@@ -563,7 +566,7 @@ public class Elements extends ArrayList<Element> {
 
     private Elements siblings(String query, boolean next, boolean all) {
         Elements els = new Elements();
-        Evaluator eval = query != null? QueryParser.parse(query) : null;
+        Evaluator eval = query != null? parser.parse(query) : null;
         for (Element e : this) {
             do {
                 Element sib = next ? e.nextElementSibling() : e.previousElementSibling();

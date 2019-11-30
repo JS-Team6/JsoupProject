@@ -4,6 +4,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.parser.Parser;
 import org.jsoup.safety.Cleaner;
 import org.jsoup.safety.Whitelist;
+import org.jsoup.select.AbstractQueryParser;
 import org.jsoup.helper.DataUtil;
 import org.jsoup.helper.HttpConnection;
 
@@ -12,6 +13,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
+
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+import org.jsoup.select.Selector;
 /**
  The core public access point to the jsoup functionality.
 
@@ -31,6 +36,12 @@ public class Jsoup {
         return Parser.parse(html, baseUri);
     }
 
+    public static void setQueryParser(AbstractQueryParser parser) {
+    	Element.setQueryParser(parser);
+    	Elements.setQueryParser(parser);
+    	Selector.setQueryParser(parser);
+    }
+    
     /**
      Parse HTML into a Document, using the provided Parser. You can provide an alternate parser, such as a simple XML
      (non-HTML) parser.
