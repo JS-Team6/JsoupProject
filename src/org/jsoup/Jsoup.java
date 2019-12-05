@@ -16,6 +16,7 @@ import java.net.URL;
 
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.jsoup.select.QueryParser;
 import org.jsoup.select.Selector;
 /**
  The core public access point to the jsoup functionality.
@@ -41,7 +42,7 @@ public class Jsoup {
     	Elements.setQueryParser(parser);
     	Selector.setQueryParser(parser);
     }
-    
+
     /**
      Parse HTML into a Document, using the provided Parser. You can provide an alternate parser, such as a simple XML
      (non-HTML) parser.
@@ -81,6 +82,10 @@ public class Jsoup {
      * @return the connection. You can add data, cookies, and headers; set the user-agent, referrer, method; and then execute.
      */
     public static Connection connect(String url) {
+    	AbstractQueryParser dparser = new QueryParser();
+    	Element.setQueryParser(dparser);
+    	Elements.setQueryParser(dparser);
+    	Selector.setQueryParser(dparser);
         return HttpConnection.connect(url);
     }
 

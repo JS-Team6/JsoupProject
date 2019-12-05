@@ -9,14 +9,14 @@ import org.jsoup.helper.Validate;
 import org.jsoup.internal.StringUtil;
 import org.jsoup.parser.TokenQueue;
 
-public class IdQueryParser extends CustomQueryParser {
+public class TestIdQueryParser extends CustomQueryParser {
 	
-	public IdQueryParser(AbstractQueryParser _parser){
+	public TestIdQueryParser(AbstractQueryParser _parser){
 		parser = _parser;
 	}
 	
 
-    public IdQueryParser() {
+    public TestIdQueryParser() {
 
     }
 

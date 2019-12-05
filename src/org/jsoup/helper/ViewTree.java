@@ -25,7 +25,7 @@ public class ViewTree {
             BufferedWriter bw = new BufferedWriter(new FileWriter(file));
             doc.traverse(new NodeVisitor() {
                 public void head(Node node, int depth) {
-                    System.out.println("Entering tag: " + node.nodeName());
+//                    System.out.println("Entering tag: " + node.nodeName());
                     try {
                     	for(int i=0; i<depth-1; i++) {
                     		bw.write(_space);

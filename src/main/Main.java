@@ -6,16 +6,19 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.AbstractQueryParser;
 import org.jsoup.select.Elements;
-import org.jsoup.select.IdQueryParser;
+import org.jsoup.select.TestIdQueryParser;
+import org.jsoup.select.PseudoQueryParser;
 import org.jsoup.select.QueryParser;
+import org.jsoup.select.StructuralQueryParser;
+import org.jsoup.select.TestNotIdQueryParser;
 import org.jsoup.helper.ViewTree;
 public class Main {
 
 	public static void main(String[] args) {
 		// example
 	       String url = "https://dhlottery.co.kr/gameResult.do?method=byWin";
-	        String selector = "#footer";
-	        Document doc = null;    
+	        String selector = ":has(div)";
+	        Document doc = null;   
 	        
 	        try {
 	            doc = Jsoup.connect(url).get(); // -- 1. get방식의 URL에 연결해서 가져온 값을 doc에 담는다.zz
@@ -24,8 +27,8 @@ public class Main {
 	            System.out.println(e.getMessage());
 	        }
 	        
-	        AbstractQueryParser parser = new QueryParser();
-	        parser = new IdQueryParser(parser);
+	        AbstractQueryParser parser = new TestNotIdQueryParser();
+	        parser = new PseudoQueryParser(parser);
 	        Jsoup.setQueryParser(parser);
 	        Elements titles = doc.select(selector); // -- 2. doc에서 selector의 내용을 가져와 Elemntes 클래스에 담는다.
 	        

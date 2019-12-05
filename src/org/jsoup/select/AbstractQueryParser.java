@@ -18,8 +18,7 @@ public abstract class AbstractQueryParser {
     public abstract Evaluator parse(String query);
 
     public abstract Evaluator parse();
-  
-    
+      
     protected abstract void findElements();
 
     protected void combinator(char combinator) {

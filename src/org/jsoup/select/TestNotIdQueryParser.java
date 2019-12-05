@@ -14,13 +14,13 @@ import static org.jsoup.internal.Normalizer.normalize;
 /**
  * Parses a CSS selector into an Evaluator tree.
  */
-public class QueryParser extends AbstractQueryParser{
+public class TestNotIdQueryParser extends AbstractQueryParser{
 
     /**
      * Create a new QueryParser.
      * @param query CSS query
      */
-    public QueryParser() {
+    public TestNotIdQueryParser() {
 
     }
 
@@ -73,25 +73,39 @@ public class QueryParser extends AbstractQueryParser{
 
     protected void findElements() {
 
-        if (tq.matchChomp("#"))
-            byId();
-        else if (tq.matchChomp("."))
+        if (tq.matchChomp("."))
             byClass();
         else if (tq.matchesWord() || tq.matches("*|"))
             byTag();
         else if (tq.matches("["))
             byAttribute();
         else if (tq.matchChomp("*"))
-            allElements();	
+            allElements();
+        else if (tq.matchChomp(":lt("))
+            indexLessThan();
+        else if (tq.matchChomp(":gt("))
+            indexGreaterThan();
+        else if (tq.matchChomp(":eq("))
+            indexEquals();
+        else if (tq.matches(":has("))
+            has();
+        else if (tq.matches(":contains("))
+            contains(false);
+        else if (tq.matches(":containsOwn("))
+            contains(true);
+        else if (tq.matches(":containsData("))
+            containsData();
+        else if (tq.matches(":matches("))
+            matches(false);
+        else if (tq.matches(":matchesOwn("))
+            matches(true);
+        else if (tq.matches(":not("))
+            not();
+        else if (tq.matchChomp(":matchText"))
+            evals.add(new Evaluator.MatchText());	
 		else // unhandled
             throw new Selector.SelectorParseException("Could not parse query '%s': unexpected token at '%s'", query, tq.remainder());
 
-    }
-
-    private void byId() {
-        String id = tq.consumeCssIdentifier();
-        Validate.notEmpty(id);
-        evals.add(new Evaluator.Id(id));
     }
 
     private void byClass() {
@@ -156,4 +170,71 @@ public class QueryParser extends AbstractQueryParser{
         evals.add(new Evaluator.AllElements());
     }
 
+    // pseudo selectors :lt, :gt, :eq
+    private void indexLessThan() {
+        evals.add(new Evaluator.IndexLessThan(consumeIndex()));
+    }
+
+    private void indexGreaterThan() {
+        evals.add(new Evaluator.IndexGreaterThan(consumeIndex()));
+    }
+
+    private void indexEquals() {
+        evals.add(new Evaluator.IndexEquals(consumeIndex()));
+    }
+    
+
+    private int consumeIndex() {
+        String indexS = tq.chompTo(")").trim();
+        Validate.isTrue(StringUtil.isNumeric(indexS), "Index must be numeric");
+        return Integer.parseInt(indexS);
+    }
+
+    // pseudo selector :has(el)
+    private void has() {
+        tq.consume(":has");
+        String subQuery = tq.chompBalanced('(', ')');
+        Validate.notEmpty(subQuery, ":has(el) subselect must not be empty");
+        evals.add(new StructuralEvaluator.Has(parse(subQuery)));
+    }
+
+    // pseudo selector :contains(text), containsOwn(text)
+    private void contains(boolean own) {
+        tq.consume(own ? ":containsOwn" : ":contains");
+        String searchText = TokenQueue.unescape(tq.chompBalanced('(', ')'));
+        Validate.notEmpty(searchText, ":contains(text) query must not be empty");
+        if (own)
+            evals.add(new Evaluator.ContainsOwnText(searchText));
+        else
+            evals.add(new Evaluator.ContainsText(searchText));
+    }
+
+    // pseudo selector :containsData(data)
+    private void containsData() {
+        tq.consume(":containsData");
+        String searchText = TokenQueue.unescape(tq.chompBalanced('(', ')'));
+        Validate.notEmpty(searchText, ":containsData(text) query must not be empty");
+        evals.add(new Evaluator.ContainsData(searchText));
+    }
+
+    // :matches(regex), matchesOwn(regex)
+    private void matches(boolean own) {
+        tq.consume(own ? ":matchesOwn" : ":matches");
+        String regex = tq.chompBalanced('(', ')'); // don't unescape, as regex bits will be escaped
+        Validate.notEmpty(regex, ":matches(regex) query must not be empty");
+
+        if (own)
+            evals.add(new Evaluator.MatchesOwn(Pattern.compile(regex)));
+        else
+            evals.add(new Evaluator.Matches(Pattern.compile(regex)));
+    }
+
+    // :not(selector)
+    private void not() {
+        tq.consume(":not");
+        String subQuery = tq.chompBalanced('(', ')');
+        Validate.notEmpty(subQuery, ":not(selector) subselect must not be empty");
+
+        evals.add(new StructuralEvaluator.Not(parse(subQuery)));
+    }
 }
