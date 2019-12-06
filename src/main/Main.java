@@ -4,27 +4,36 @@ import java.io.IOException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.AbstractQueryParser;
 import org.jsoup.select.Elements;
+import org.jsoup.select.TestIdQueryParser;
+import org.jsoup.select.PseudoQueryParser;
+import org.jsoup.select.QueryParser;
+import org.jsoup.select.StructuralQueryParser;
+import org.jsoup.select.TestNotIdQueryParser;
 import org.jsoup.helper.ViewTree;
 public class Main {
 
 	public static void main(String[] args) {
 		// example
-	       String url = "https://www.naver.com";
-	        String selector = "h2";
-	        Document doc = null;    
+	       String url = "https://dhlottery.co.kr/gameResult.do?method=byWin";
+	        String selector = ":has(div)";
+	        Document doc = null;   
 	        
 	        try {
-	            doc = Jsoup.connect(url).get(); // -- 1. get¹æ½ÄÀÇ URL¿¡ ¿¬°áÇØ¼­ °¡Á®¿Â °ªÀ» doc¿¡ ´ã´Â´Ù.zz
-	            ViewTree.makeViewTreeFile(doc, "test.txt");
+	            doc = Jsoup.connect(url).get(); // -- 1. getï¿½ï¿½ï¿½ï¿½ï¿½ URLï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ docï¿½ï¿½ ï¿½ï¿½Â´ï¿½.zz
+//	            ViewTree.makeViewTreeFile(doc, "test.txt");
 	        } catch (IOException e) {
 	            System.out.println(e.getMessage());
 	        }
 	        
-	        Elements titles = doc.select(selector); // -- 2. doc¿¡¼­ selectorÀÇ ³»¿ëÀ» °¡Á®¿Í Elemntes Å¬·¡½º¿¡ ´ã´Â´Ù.
+	        AbstractQueryParser parser = new TestNotIdQueryParser();
+	        parser = new PseudoQueryParser(parser);
+	        Jsoup.setQueryParser(parser);
+	        Elements titles = doc.select(selector); // -- 2. docï¿½ï¿½ï¿½ï¿½ selectorï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Elemntes Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Â´ï¿½.
 	        
-	        for(Element element: titles) { // -- 3. Elemntes ±æÀÌ¸¸Å­ ¹Ýº¹ÇÑ´Ù.
-	            System.out.println(element.text()); // -- 4. ¿øÇÏ´Â ¿ä¼Ò°¡ Ãâ·ÂµÈ´Ù.
+	        for(Element element: titles) { // -- 3. Elemntes ï¿½ï¿½ï¿½Ì¸ï¿½Å­ ï¿½Ýºï¿½ï¿½Ñ´ï¿½.
+	            System.out.println(element); // -- 4. ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½Ò°ï¿½ ï¿½ï¿½ÂµÈ´ï¿½.
 	        }
 	    
 	}

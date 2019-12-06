@@ -5,6 +5,7 @@ import org.jsoup.helper.Validate;
 import org.jsoup.internal.StringUtil;
 import org.jsoup.parser.ParseSettings;
 import org.jsoup.parser.Tag;
+import org.jsoup.select.AbstractQueryParser;
 import org.jsoup.select.Collector;
 import org.jsoup.select.Elements;
 import org.jsoup.select.Evaluator;
@@ -45,7 +46,7 @@ public class Element extends Node {
     List<Node> childNodes;
     private Attributes attributes;
     private String baseUri;
-
+    public static AbstractQueryParser parser;
     /**
      * Create a new, standalone element.
      * @param tag tag name
@@ -53,7 +54,10 @@ public class Element extends Node {
     public Element(String tag) {
         this(Tag.valueOf(tag), "", new Attributes());
     }
-
+    
+    public static void setQueryParser(AbstractQueryParser p) {
+    	parser = p;
+    }
     /**
      * Create a new, standalone Element. (Standalone in that is has no parent.)
      * 
@@ -390,7 +394,7 @@ public class Element extends Node {
      * @return if this element matches the query
      */
     public boolean is(String cssQuery) {
-        return is(QueryParser.parse(cssQuery));
+        return is(parser.parse(cssQuery));
     }
 
     /**

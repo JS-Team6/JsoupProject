@@ -76,9 +76,13 @@ import java.util.IdentityHashMap;
  * @see Element#select(String)
  */
 public class Selector {
-    // not instantiable
+    static AbstractQueryParser parser;
+	
     private Selector() {}
 
+    public static void setQueryParser(AbstractQueryParser p) {
+    	parser = p;
+    }
     /**
      * Find elements matching selector.
      *
@@ -89,7 +93,9 @@ public class Selector {
      */
     public static Elements select(String query, Element root) {
         Validate.notEmpty(query);
-        return select(QueryParser.parse(query), root);
+
+//        System.out.println("selector.select :" + query);
+        return select(parser.parse(query), root);
     }
 
     /**
@@ -115,7 +121,7 @@ public class Selector {
     public static Elements select(String query, Iterable<Element> roots) {
         Validate.notEmpty(query);
         Validate.notNull(roots);
-        Evaluator evaluator = QueryParser.parse(query);
+        Evaluator evaluator = parser.parse(query);
         ArrayList<Element> elements = new ArrayList<>();
         IdentityHashMap<Element, Boolean> seenElements = new IdentityHashMap<>();
         // dedupe elements by identity, not equality
@@ -157,7 +163,7 @@ public class Selector {
      */
     public static Element selectFirst(String cssQuery, Element root) {
         Validate.notEmpty(cssQuery);
-        return Collector.findFirst(QueryParser.parse(cssQuery), root);
+        return Collector.findFirst(parser.parse(cssQuery), root);
     }
 
     public static class SelectorParseException extends IllegalStateException {
