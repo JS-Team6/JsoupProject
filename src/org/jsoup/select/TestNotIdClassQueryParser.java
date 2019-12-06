@@ -114,7 +114,7 @@ public class TestNotIdClassQueryParser extends AbstractQueryParser{
         evals.add(new Evaluator.Class(className.trim()));
     }
 
-    
+  
     private void byTag() {
         String tagName = tq.consumeElementSelector();
 
