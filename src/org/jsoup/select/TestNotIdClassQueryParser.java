@@ -14,13 +14,13 @@ import static org.jsoup.internal.Normalizer.normalize;
 /**
  * Parses a CSS selector into an Evaluator tree.
  */
-public class TestNotIdQueryParser extends AbstractQueryParser{
+public class TestNotIdClassQueryParser extends AbstractQueryParser{
 
     /**
      * Create a new QueryParser.
      * @param query CSS query
      */
-    public TestNotIdQueryParser() {
+    public TestNotIdClassQueryParser() {
 
     }
 
@@ -73,7 +73,9 @@ public class TestNotIdQueryParser extends AbstractQueryParser{
 
     protected void findElements() {
 
-        if (tq.matchesWord() || tq.matches("*|"))
+        if (tq.matchChomp("."))
+            byClass();
+        else if (tq.matchesWord() || tq.matches("*|"))
             byTag();
         else if (tq.matches("["))
             byAttribute();
@@ -105,6 +107,13 @@ public class TestNotIdQueryParser extends AbstractQueryParser{
             throw new Selector.SelectorParseException("Could not parse query '%s': unexpected token at '%s'", query, tq.remainder());
 
     }
+
+    private void byClass() {
+        String className = tq.consumeCssIdentifier();
+        Validate.notEmpty(className);
+        evals.add(new Evaluator.Class(className.trim()));
+    }
+
     
     private void byTag() {
         String tagName = tq.consumeElementSelector();

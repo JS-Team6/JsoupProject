@@ -3,8 +3,8 @@
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
   <class id="1" language="java" name="org.jsoup.select.AbstractQueryParser" project="jsoup-team6" 
     file="/jsoup-team6/src/org/jsoup/select/AbstractQueryParser.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="267" width="183" x="658" y="92"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    <position height="230" width="183" x="658" y="92"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
@@ -12,7 +12,7 @@
   </class>  
   <class id="2" language="java" name="org.jsoup.select.TestNotIdQueryParser" project="jsoup-team6" 
     file="/jsoup-team6/src/org/jsoup/select/TestNotIdQueryParser.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="166" y="607"/>    
+    <position height="-1" width="-1" x="199" y="579"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -21,7 +21,7 @@
   </class>  
   <class id="3" language="java" name="org.jsoup.select.TestNotClassQueryParser" project="jsoup-team6" 
     file="/jsoup-team6/src/org/jsoup/select/TestNotClassQueryParser.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="427" y="611"/>    
+    <position height="-1" width="-1" x="444" y="571"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -30,7 +30,7 @@
   </class>  
   <class id="4" language="java" name="org.jsoup.select.CustomQueryParser" project="jsoup-team6" 
     file="/jsoup-team6/src/org/jsoup/select/CustomQueryParser.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="979" y="518"/>    
+    <position height="-1" width="-1" x="896" y="452"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -39,7 +39,7 @@
   </class>  
   <class id="5" language="java" name="org.jsoup.select.QueryParser" project="jsoup-team6" 
     file="/jsoup-team6/src/org/jsoup/select/QueryParser.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="676" y="549"/>    
+    <position height="-1" width="-1" x="675" y="505"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -57,7 +57,7 @@
   </class>  
   <class id="7" language="java" name="org.jsoup.select.PseudoQueryParser" project="jsoup-team6" 
     file="/jsoup-team6/src/org/jsoup/select/PseudoQueryParser.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1237" y="803"/>    
+    <position height="-1" width="-1" x="1230" y="518"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -66,7 +66,7 @@
   </class>  
   <class id="8" language="java" name="org.jsoup.select.TestIdQueryParser" project="jsoup-team6" 
     file="/jsoup-team6/src/org/jsoup/select/TestIdQueryParser.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1258" y="538"/>    
+    <position height="-1" width="-1" x="1232" y="761"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -94,7 +94,7 @@
     <end type="TARGET" refId="1"/>  
   </generalization>  
   <generalization id="14">    
-    <bendpoint x="386" y="337"/>    
+    <bendpoint x="349" y="317"/>    
     <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="1"/>  
   </generalization>  
@@ -103,7 +103,7 @@
     <end type="TARGET" refId="1"/>  
   </generalization>  
   <association id="16">    
-    <bendpoint x="1025" y="313"/>    
+    <bendpoint x="901" y="198"/>    
     <end type="SOURCE" refId="4" navigable="false">      
       <attribute id="17" name="parser"/>      
       <multiplicity id="18" minimum="0" maximum="1"/>    
