@@ -1,0 +1,143 @@
+[33mcommit e4f464a36271c65a63a9b79eb2788cf0a41400c3[m[33m ([m[1;36mHEAD -> [m[1;32mdevelop[m[33m)[m
+Author: ysg <qpple6@naver.com>
+Date:   Fri Dec 6 13:20:22 2019 +0900
+
+    before attach code imagne
+
+[33mcommit 99a8151bbe500411fb0ef9ce3d2d4f5be7b9daf6[m[33m ([m[1;31morigin/develop[m[33m)[m
+Author: ysg <qpple6@naver.com>
+Date:   Fri Dec 6 02:21:05 2019 +0900
+
+     add designe develop image
+
+[33mcommit b4b10b9df9bd7e839af851d815007b4da1cb114e[m
+Author: chaechef <chaeefe@gmail.com>
+Date:   Fri Nov 29 20:27:51 2019 +0900
+
+    update IdQueryParser
+
+[33mcommit 9a98d4fc44d366fec8f1f1728a44aabc0967a709[m
+Author: chaechef <chaeefe@gmail.com>
+Date:   Fri Nov 29 20:22:29 2019 +0900
+
+    add QueryParser inteface & idQueryParser
+
+[33mcommit 4ff28b15b8cd0db52649b4763d40daa4861e1b8c[m[33m ([m[1;31morigin/master[m[33m, [m[1;32mmaster[m[33m)[m
+Merge: 5d2c3f9 cd9cd73
+Author: chaechef <chaeefe@gmail.com>
+Date:   Sun Nov 24 20:44:47 2019 +0900
+
+    Merge branch 'develop'
+
+[33mcommit cd9cd73f2d00f4765892f3a7274f6113ff248595[m
+Merge: cd0cf97 0c10dc8
+Author: chaechef <chaeefe@gmail.com>
+Date:   Sun Nov 24 20:44:39 2019 +0900
+
+    Merge branch 'document' into develop
+
+[33mcommit 0c10dc8f93c388c91d37652ed29779219933ce9e[m
+Author: chaechef <chaeefe@gmail.com>
+Date:   Sun Nov 24 20:44:30 2019 +0900
+
+    init viewTree
+
+[33mcommit 04fad715c3b610ab4a099bed2eb386d1fd29a6a1[m
+Author: kiissy <kiissy@naver.com>
+Date:   Fri Nov 22 18:05:43 2019 +0900
+
+    Update selector_diagram.ucls
+
+[33mcommit 5d2c3f92d839db0f9d0d4ca7c09363e8499314fa[m
+Author: ysg <qpple6@naver.com>
+Date:   Fri Nov 22 15:07:32 2019 +0900
+
+    doc change
+
+[33mcommit 8c1b3c571b82b6f452b03f9fbbcaf6de7160ee17[m
+Author: kiissy <kiissy@naver.com>
+Date:   Fri Nov 22 14:45:52 2019 +0900
+
+    Create ViewTree.java
+
+[33mcommit bc5e74f579f680e7bb0753ef520454574e57818b[m
+Merge: e88067c cd0cf97
+Author: chaechef <chaeefe@gmail.com>
+Date:   Fri Nov 22 14:03:32 2019 +0900
+
+    Merge branch 'develop'
+
+[33mcommit cd0cf973146d06b76e292b83c7d7824733a956c4[m
+Merge: 5141306 5804e06
+Author: chaechef <chaeefe@gmail.com>
+Date:   Fri Nov 22 14:03:10 2019 +0900
+
+    Merge branch 'document' into origin/develop
+
+[33mcommit 5804e069b561242bbe51e4898f167aeb7d66b530[m
+Author: SEORA <dreamctsr@gmail.com>
+Date:   Fri Nov 22 13:56:33 2019 +0900
+
+    Create Diagram_Node.png
+
+[33mcommit 92c17fb4d6a455af9d7168d7f44988d8c3702730[m
+Author: SEORA <dreamctsr@gmail.com>
+Date:   Fri Nov 22 13:49:42 2019 +0900
+
+    Update DP_Jsoup Project.docx
+
+[33mcommit ce49b5a09a4a523c4d42b3461df3d02d79356209[m
+Merge: 9f3ab4c 250c6a1
+Author: SEORA <dreamctsr@gmail.com>
+Date:   Fri Nov 22 13:35:53 2019 +0900
+
+    Update DP_Jsoup Project.docx
+
+[33mcommit 9f3ab4c56ea73422b3553b256df11f278b7d46f8[m
+Author: SEORA <dreamctsr@gmail.com>
+Date:   Fri Nov 22 13:34:25 2019 +0900
+
+    Update DP_Jsoup Project.docx
+
+[33mcommit 250c6a1c0ec83065b2c39f3bfa032b393ac5a42a[m
+Author: ysg <qpple6@naver.com>
+Date:   Fri Nov 22 13:10:03 2019 +0900
+
+    Change DP_Jsoup Project
+
+[33mcommit dd14c384e6235e1a009d9810b62a8b000388694e[m
+Author: chaechef <chaeefe@gmail.com>
+Date:   Fri Nov 22 12:43:10 2019 +0900
+
+    add pattern
+
+[33mcommit e88067ce7bc60e2e2eb7481d8ad6560c95e9fe87[m
+Author: kiissy <kiissy@naver.com>
+Date:   Fri Nov 22 12:08:21 2019 +0900
+
+    Jsoup project word file and about select
+
+[33mcommit 87e76369ea2292258ba33fd19aee4731177546a8[m
+Author: kiissy <kiissy@naver.com>
+Date:   Wed Nov 20 19:26:22 2019 +0900
+
+    Create DP_Jsoup Project.docx
+
+[33mcommit 51413068fd9ecc8d751b2d263f557aa5e28baf6c[m
+Merge: 27cf486 a353a6b
+Author: chaehoonki <chaeefe@gmail.com>
+Date:   Sat Nov 16 15:41:29 2019 +0900
+
+    Merge branch 'develop'
+
+[33mcommit a353a6b5a33ce1e2cd4c06b1cc27c50941c84b73[m
+Author: chaehoonki <chaeefe@gmail.com>
+Date:   Sat Nov 16 15:35:09 2019 +0900
+
+    add .project file & .classpath
+
+[33mcommit 27cf4863b2c20e5d2fdd77c3f02a593e8d9e745d[m
+Author: chaehoonki <chaeefe@gmail.com>
+Date:   Sat Nov 16 15:27:23 2019 +0900
+
+    initial commit
