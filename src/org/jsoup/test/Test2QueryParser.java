@@ -6,19 +6,12 @@ import java.io.IOException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.jsoup.select.AbstractQueryParser;
-import org.jsoup.select.Elements;
-import org.jsoup.select.PseudoQueryParser;
-import org.jsoup.select.QueryParser;
-import org.jsoup.select.StructuralQueryParser;
-import org.jsoup.select.TestClassQueryParser;
-import org.jsoup.select.TestIdQueryParser;
-import org.jsoup.select.TestNotIdQueryParser;
+import org.jsoup.select.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class TestQueryParser {
+class Test2QueryParser {
     String url = "https://dhlottery.co.kr/gameResult.do?method=byWin";
     Document doc = null; 
    
@@ -142,28 +135,35 @@ class TestQueryParser {
 	    assertNotNull(titles);
 
 	}
+	@Test
 	void testNotClassIdQuerytest() {
 		/*set query*/
-		String selector = ":first-child";
+		String selector = ".footer";
 		/*set parser*/
-	    AbstractQueryParser parser = new QueryParser();
-	    parser = new StructuralQueryParser(parser);
+	    AbstractQueryParser parser = new TestNotIdClassQueryParser();
+	    parser = new TestIdQueryParser(parser);
+	    parser = new TestClassQueryParser(parser);
+
 	    Jsoup.setQueryParser(parser);
 	    /*running*/
 	    Elements titles = doc.select(selector); // -- 2. doc에서 selector의 내용을 가져와 Elemntes 클래스에 담는다.
 	    assertNotNull(titles);
 
 	}
-	void testNotClassIdQuerytestwerew22() {
+	@Test
+	void testNotClassIdQuerytest2() {
 		/*set query*/
-		String selector = ":first-child";
+		String selector = ".logo";
 		/*set parser*/
-	    AbstractQueryParser parser = new QueryParser();
-	    parser = new StructuralQueryParser(parser);
+	    AbstractQueryParser parser = new TestNotIdClassQueryParser();
+	    parser = new TestClassQueryParser(parser);
+	    parser = new TestIdQueryParser(parser);
+
 	    Jsoup.setQueryParser(parser);
 	    /*running*/
 	    Elements titles = doc.select(selector); // -- 2. doc에서 selector의 내용을 가져와 Elemntes 클래스에 담는다.
 	    assertNotNull(titles);
+
 	}
 	@Test
 	void idQueryParser() {

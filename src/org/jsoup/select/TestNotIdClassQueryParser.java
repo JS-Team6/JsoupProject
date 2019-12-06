@@ -73,9 +73,7 @@ public class TestNotIdClassQueryParser extends AbstractQueryParser{
 
     protected void findElements() {
 
-        if (tq.matchChomp("."))
-            byClass();
-        else if (tq.matchesWord() || tq.matches("*|"))
+        if (tq.matchesWord() || tq.matches("*|"))
             byTag();
         else if (tq.matches("["))
             byAttribute();
@@ -108,11 +106,6 @@ public class TestNotIdClassQueryParser extends AbstractQueryParser{
 
     }
 
-    private void byClass() {
-        String className = tq.consumeCssIdentifier();
-        Validate.notEmpty(className);
-        evals.add(new Evaluator.Class(className.trim()));
-    }
 
   
     private void byTag() {
