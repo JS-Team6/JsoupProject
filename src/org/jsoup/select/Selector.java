@@ -93,7 +93,6 @@ public class Selector {
      */
     public static Elements select(String query, Element root) {
         Validate.notEmpty(query);
-    	QueryParser parser = new QueryParser(query);
 
 //        System.out.println("selector.select :" + query);
         return select(parser.parse(query), root);

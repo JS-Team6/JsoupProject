@@ -565,7 +565,6 @@ public class Elements extends ArrayList<Element> {
     }
 
     private Elements siblings(String query, boolean next, boolean all) {
-    	QueryParser parser = new QueryParser(query);
 
         Elements els = new Elements();
         Evaluator eval = query != null? parser.parse(query) : null;
