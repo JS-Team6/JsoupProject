@@ -7,40 +7,19 @@ import org.jsoup.internal.StringUtil;
 import org.jsoup.parser.TokenQueue;
 
 public abstract class AbstractQueryParser {
+	
 	protected final static String[] combinators = {",", ">", "+", "~", " "};
 	protected static final String[] AttributeEvals = new String[]{"=", "!=", "^=", "$=", "*=", "~="};
 
-    protected TokenQueue tq;
-    protected String query;
-    protected List<Evaluator> evals = new ArrayList<>();
+    protected static TokenQueue tq;
+    protected static String query;
+    protected static List<Evaluator> evals = new ArrayList<>();
 
-    Evaluator parse() {
-        tq.consumeWhitespace();
+    public abstract Evaluator parse(String query);
 
-        if (tq.matchesAny(combinators)) { // if starts with a combinator, use root as elements
-            evals.add(new StructuralEvaluator.Root());
-            combinator(tq.consume());
-        } else {
-            findElements();
-        }
-
-        while (!tq.isEmpty()) {
-            // hierarchy and extras
-            boolean seenWhite = tq.consumeWhitespace();
-            if (tq.matchesAny(combinators)) {
-                combinator(tq.consume());
-            } else if (seenWhite) {
-                combinator(' ');
-            } else { // E.class, E#id, E[attr] etc. AND
-                findElements(); // take next el, #. etc off queue
-            }
-        }
-
-        if (evals.size() == 1)
-            return evals.get(0);
-
-        return new CombiningEvaluator.And(evals);
-    }
+    public abstract Evaluator parse();
+      
+    protected abstract void findElements();
 
     protected void combinator(char combinator) {
         tq.consumeWhitespace();
@@ -93,7 +72,7 @@ public abstract class AbstractQueryParser {
         else rootEval = currentEval;
         evals.add(rootEval);
     }
-    
+
     protected String consumeSubQuery() {
         StringBuilder sq = StringUtil.borrowBuilder();
         while (!tq.isEmpty()) {
@@ -109,7 +88,5 @@ public abstract class AbstractQueryParser {
         return StringUtil.releaseBuilder(sq);
     }
 
-	protected abstract Evaluator parse(String subQuery);
 
-	protected abstract void findElements();
 }

@@ -4,6 +4,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.parser.Parser;
 import org.jsoup.safety.Cleaner;
 import org.jsoup.safety.Whitelist;
+import org.jsoup.select.AbstractQueryParser;
 import org.jsoup.helper.DataUtil;
 import org.jsoup.helper.HttpConnection;
 
@@ -12,6 +13,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
+
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+import org.jsoup.select.QueryParser;
+import org.jsoup.select.Selector;
 /**
  The core public access point to the jsoup functionality.
 
@@ -29,6 +35,12 @@ public class Jsoup {
      */
     public static Document parse(String html, String baseUri) {
         return Parser.parse(html, baseUri);
+    }
+
+    public static void setQueryParser(AbstractQueryParser parser) {
+    	Element.setQueryParser(parser);
+    	Elements.setQueryParser(parser);
+    	Selector.setQueryParser(parser);
     }
 
     /**
@@ -70,6 +82,10 @@ public class Jsoup {
      * @return the connection. You can add data, cookies, and headers; set the user-agent, referrer, method; and then execute.
      */
     public static Connection connect(String url) {
+    	AbstractQueryParser dparser = new QueryParser();
+    	Element.setQueryParser(dparser);
+    	Elements.setQueryParser(dparser);
+    	Selector.setQueryParser(dparser);
         return HttpConnection.connect(url);
     }
 
